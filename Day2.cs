@@ -19,10 +19,15 @@ namespace Advent_of_Code
 
             // Part One
             int counter_of_valid = 0;
+            // Part Two
+            int counter_of_valid_2 = 0;
+            
             int min;
             int max;
             char c;
             string password;
+            
+            
             foreach(string s in lines)
             {
                 Console.WriteLine(s);
@@ -34,9 +39,11 @@ namespace Advent_of_Code
 
                 Console.WriteLine($"Check if <{min},{max}> * {c} in {password}");
 
+                // Part One
                 int counter = 0;
                 foreach(char x in password)
                 {
+
                     if (x == c) counter++;
                 }
                 if (min <= counter && counter <= max)
@@ -44,10 +51,21 @@ namespace Advent_of_Code
                     Console.WriteLine($"Password {password} is valid");
                     counter_of_valid++;
                 }
+
+                // Part Two
+                if ((password[min - 1] == c && password[max - 1] != c) || (password[min - 1] != c && password[max-1] == c))
+                {
+                    Console.WriteLine($"Password {password} valid with the second policy");
+                    counter_of_valid_2++;
+                }
                 Console.WriteLine("----------");
             }
 
-            Console.WriteLine($"Found {counter_of_valid} valid passwords");
+
+           
+
+            Console.WriteLine($"Part1 - Found {counter_of_valid} valid passwords");
+            Console.WriteLine($"Part2 - Found {counter_of_valid_2} valid passwords");
 
         }
     }
