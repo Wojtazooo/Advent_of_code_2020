@@ -22,7 +22,7 @@ namespace Advent_of_Code
                 values.Add(int.Parse(s));
             }
 
-            for(int i = 0; i < values.Count; i++) // o(n^2)
+            for(int i = 0; i < values.Count; i++) // o(n^3)
             {
                 for(int j = i; j < values.Count; j++)
                 {
@@ -30,6 +30,14 @@ namespace Advent_of_Code
                     {
                         Console.WriteLine($"{values[i]} + {values[j]} = 2020");
                         Console.WriteLine($"{values[i]} * {values[j]} = {values[i] * values[j]}");
+                    }
+                    for (int k = j; k < values.Count; k++)
+                    {
+                        if((values[k] + values[i] + values[j]) == 2020)
+                        {
+                            Console.WriteLine($"{values[i]} + {values[j]} + {values[k]} = 2020");
+                            Console.WriteLine($"{values[i]} * {values[j]} * {values[k]} = {values[i] * values[j] * values[k]}");
+                        }
                     }
                 }
             }
