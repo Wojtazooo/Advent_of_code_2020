@@ -39,6 +39,7 @@ namespace Advent_of_Code
                 char[] act_line = seat_layout[i].ToCharArray(); // take next line to edit
                 for(int j = 0; j < cols; j++)
                 {
+					if (seat_layout[i][j] == '.') continue;
                     int neighbours = count_neighbours(i, j, seat_layout);
                     if (seat_layout[i][j] == 'L' && neighbours == 0)
                     {
@@ -93,10 +94,8 @@ namespace Advent_of_Code
             }
             string[] seat_layout = File.ReadAllLines(file_name);
 
-            // do while chaos stabilizes
-            while(next_round(seat_layout) > 0)
-            {
-            }
+            // do while loop until chaos stabilizes
+            while(next_round(seat_layout) > 0) {}
 
             print_seat_layout(seat_layout);
             
