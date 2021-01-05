@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace Advent_of_Code
 {
@@ -21,7 +22,8 @@ namespace Advent_of_Code
 
             // create list of values which are correct
             int ind = 0;
-            var list = Enumerable.Range(0, 0);
+            SortedSet<int> set = new SortedSet<int>();
+
             for(int i = 0; i < lines.Length; i++)
             {
                 if(rx_range.IsMatch(lines[i]))
@@ -35,7 +37,12 @@ namespace Advent_of_Code
                         int max = int.Parse(act.Substring(act.IndexOf("-")+1));
                         //Console.WriteLine("max = " + max);
 
-                        list = list.Concat(Enumerable.Range(min, max - min + 1));
+                        var range = Enumerable.Range(min, max - min + 1);
+
+                        foreach(int x in range)
+                        {
+                            set.Add(x);
+                        }
                     }
                 }
                 if(lines[i].Contains("nearby tickets:"))
@@ -53,7 +60,7 @@ namespace Advent_of_Code
                 foreach(string val in values)
                 {
                     int x = int.Parse(val);
-                    if(list.Contains(x) == false)
+                    if(set.Contains(x) == false)
                     {
                         sum += int.Parse(val);
                     }
